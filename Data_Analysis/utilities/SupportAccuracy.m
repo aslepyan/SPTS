@@ -29,8 +29,8 @@ function [pctSame,pctDiff] = supportAccuracy(x,d)
     nDiff = nTotal - nMatch;  % or sum(x(:) ~= D(:))
     
     % Compute percentages
-    pctSame = (nMatch / nTotal) * 100;
-    pctDiff = (nDiff  / nTotal) * 100;
+    pctSame = (nMatch / nTotal);
+    pctDiff = (nDiff  / nTotal);
     
     % Display results
     %fprintf('Percent same: %.2f%%\n', pctSame);

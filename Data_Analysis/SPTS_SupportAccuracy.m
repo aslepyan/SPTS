@@ -4,19 +4,22 @@ shape = "brain"; % change to the name of the object you want to measure support 
 addpath("utilities/")
 load("Random_Weights_Generation/A_rand2.mat") % generate random weights first!
 load("Dictionary_learning/dictionary.mat")
+load(append("Measurements_Collected/",shape,"/",shape,"_raster.mat"))
+D = C;
 load(append("Measurements_Collected/",shape,"/",shape,"_random2.mat"))
 load(append("Measurements_Collected/",shape,"/",shape,"_random2_time.mat"))
-load(append("Measurements_Collected/",shape,"/",shape,"_raster.mat"))
+
 %% parameters setting
-OMP_sparsity = 25;
-press_range = 5:14;
-frame_range = 401:700;
+OMP_sparsity = 20;
+press_range = 6:15;
+frame_range = 501:700;
 A_randtype = A_rand2;
 
 %% calculate support accuracy
 d = D(:,600,10); % ground truth
 Same_tot = zeros(1,100);
 for press_no = press_range % iterate through touch events
+    disp(press_no);
     Same_avg = zeros(1,100);
     for frame_no = frame_range % iterate through all frames of a touch event
         Same_list = zeros(1,100);
@@ -43,9 +46,11 @@ for press_no = press_range % iterate through touch events
 end
 Same_tot = Same_tot / size(press_range,2); % average across all touch events
 
-%%figure(1)
-%%plot(Same_tot)
-%% save the accuracies into a file
-temp = [temp;Same_tot]
-support_accuracy_1{1,3} = Same_tot
-save data_temp.mat temp support_accuracy_1
+%figure(1)
+%plot(Same_tot)
+
+%% save the accuracies into total_res. 
+% Create a empty array called total_res before running this cell for the first time!
+total_res = [total_res;Same_tot];
+mean_res = mean(total_res);
+plot(mean_res);
