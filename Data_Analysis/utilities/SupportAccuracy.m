@@ -1,0 +1,39 @@
+% Jan 13th 
+% Comparing reconstructed results with raster 
+% Calculate support accuracy
+
+function [pctSame,pctDiff] = supportAccuracy(x,d)
+    % Take the max voltage and classify each pixel as 1 or 0
+    maxRand= max(x);
+    %x(x<0.1) = 0;
+    x(x<0.23*maxRand) = 0;
+    x(x>0.23*maxRand) = 1;
+
+    %imagesc(reshape(x,10,10)',[-1,1])
+    
+    % Separate function for comparing support accuracy with raster data 
+    maxRaster = max(d);
+    %d(d<0.1) = 0;
+    d(d<0.23*maxRaster) = 0;
+    d(d>0.23*maxRaster) = 1;
+
+    % imagesc(reshape(d,10,10)',[-1,1])
+    
+    % Count total elements
+    nTotal = numel(x);
+    
+    % Count how many match
+    nMatch = sum(x(:) == d(:));
+    
+    % Count how many differ
+    nDiff = nTotal - nMatch;  % or sum(x(:) ~= D(:))
+    
+    % Compute percentages
+    pctSame = (nMatch / nTotal) * 100;
+    pctDiff = (nDiff  / nTotal) * 100;
+    
+    % Display results
+    %fprintf('Percent same: %.2f%%\n', pctSame);
+    %fprintf('Percent different: %.2f%%\n', pctDiff);
+end
+
