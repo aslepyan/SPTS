@@ -1,4 +1,4 @@
-%% load necessary random weight matrices and last saved progress
+%% load necessary random weight matrices and measurements
 shape = "brain"; % change to the name of the object you want to measure support accuracy on, must be the same with folder names in Measurement_Collected
 true_label = 1; %change for each object! label for each object is their place among all 17 in alphabetical order. 
 
@@ -6,14 +6,12 @@ addpath("utilities/")
 load("Random_Weights_Generation/A_rand2.mat") % generate random weights first!
 load("Dictionary_learning/dictionary.mat")
 load("SRC_Library/SRC_lib.mat")
-load(append("Measurements_Collected/",shape,"/",shape,"_raster.mat"))
-D = C;
 load(append("Measurements_Collected/",shape,"/",shape,"_random2.mat"))
 load(append("Measurements_Collected/",shape,"/",shape,"_random2_time.mat"))
 
 %% parameters setting
 OMP_sparsity = 20;
-press_range = 6:15; 
+press_range = 6:7; 
 frame_start = 501; %starting frame number for each press
 frame_end = 700; %ending frame number for each press
 vote_period = 20; %vote for every 20 reconstructions. Vote among all past reconstruction classifications of this press. 

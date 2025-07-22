@@ -1,12 +1,13 @@
 %% load necessary random weight matrices and last saved progress
-load("A_rand2.mat") % Binary Random Weights large lookup table
-load("rbt_arm/random2.mat") % application data
-load("rbt_arm/raster.mat") % application data
+addpath("utilities/")
+load("Random_Weights_Generation/A_rand2.mat") % generate random weights first!
+load("Application_Data/robort_arm/random2.mat") % SPTS measurements
+load("Application_Data/robort_arm/raster.mat") % Raster measurements
 %% set parameters
 framePosition = [1000,2000,3000,4000,5000,6000]; % Application data take per 1000 frames continuously
-OMP_sparsity = 3; 
+OMP_sparsity = 3; % Since one pixel is pressed at a time
 
-%% recon
+%% reconstruction
 E = [];
 for sample_level = 25
     recon_total = floor(100*1000/sample_level);
@@ -30,7 +31,7 @@ for sample_level = 25
     end
 end
 
-%%
+%% graphing reconstructed tactile signal
 for i = 1:4000
     imagesc(reshape(E(:,i,6),10,10)',[-5,5])
     %sgtitle(sprintf("i = %d", i))
@@ -39,7 +40,7 @@ for i = 1:4000
 end
 hold off
 
-%%
+%% graphing raster scanned tactile signal
 for i = 1:1000
     imagesc(reshape(D(:,i,1),10,10)',[-2.2,1.8])
     %sgtitle(sprintf("i = %d", i))

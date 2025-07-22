@@ -1,9 +1,8 @@
-%% load necessary random weight matrices and last saved progress
+%% load necessary random weight matrices and measurements
 shape = "brain"; % change to the name of the object you want to measure support accuracy on, must be the same with folder names in Measurement_Collected
 
 addpath("utilities/")
 load(append("Measurements_Collected/",shape,"/",shape,"_raster.mat"))
-D = C;
 load("Random_Weights_Generation/A_rand2.mat") % generate random weights first!
 
 %% parameters setting

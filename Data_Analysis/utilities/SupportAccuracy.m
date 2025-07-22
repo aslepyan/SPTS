@@ -1,8 +1,17 @@
-% Jan 13th 
-% Comparing reconstructed results with raster 
-% Calculate support accuracy
-
 function [pctSame,pctDiff] = supportAccuracy(x,d)
+
+% label pixels as 1 or 0 and compare reconstructed tactile signal with
+% groud truth raster signal for pixel wise binary agreement. Calculates
+% accuracy by number_of_pixels_agreed / total_number_of_pixels
+
+% Inputs:
+% x : reconstructed tactile signal (100 pixels) from OMP
+% d : ground truth raster scanned tactile signal
+%
+% Outputs:
+% pctSame: resulting support accuracy
+% pctDiff: 1 - pctSame
+
     % Take the max voltage and classify each pixel as 1 or 0
     maxRand= max(x);
     %x(x<0.1) = 0;
