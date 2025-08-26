@@ -2,8 +2,6 @@
 
 # Single-Pixel Tactile Skin via Compressive Sampling
 
-[[Paper](https://arxiv.org/abs/2410.13847)]
-
 [Ariel Slepyan](https://scholar.google.com/citations?hl=en&user=8uVwi4UAAAAJ&view_op=list_works&sortby=pubdate)<sup>1</sup>†, 
 [Wanting Xing](https://scholar.google.com/citations?view_op=list_works&hl=en&user=L_5PIfgAAAAJ)<sup>2</sup>†, 
 [Xuanming Zhang](https://www.researchgate.net/profile/Aidan_Aug)<sup>1</sup>†, 
