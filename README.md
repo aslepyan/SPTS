@@ -20,8 +20,12 @@ The codes for using our methods for tactile image data and realizing our results
 Our data files are located in `SPTS/Data_Analysis`. Each data folder is explained below.
 * `/Measurements_Collected` contains both raster and compressive scans for 17 daily objects;
 * `/Application_Data` contains both compressive scans we collected for Rapid Contact Localization `/ball_bouncing` and the demo video with the robot arm `/robort_arm`.
-* 
+  
 ### Compressed and Raster Data Acquisition
+All files associated with data collection is in `/Data_Collection`. To collect data, please first upload the code in`Microcontroller_Code/Receiver_Code/Receiver_Code.ino` onto each Attiny412 on the tactile sensor hardware using a USB UPDI uploader. Make sure that each Attiny412 has a different address by changing the "adrs" variable before you upload to the microcontroller. Once all Attiny412s are programmed, connect the Teensy4.1 to your computer and upload the code in `/Microcontroller_Code/Transmitter_Code/Transmitter_Code.ino`. Depending on whether you would like to collect raster scans or compressive scans, follow instuctions in the comments at the Loop function. Once the transmitter code is uploaded, immediately run the matlab script in `/Matlab_Code/DataCollection.m`, and data collections should start. You can end data collection by simply using the stop button in matlab.
+
+### Tactile Dictionary Learning
+The folder `Data_Analysis/Dictionary_Learning` is for creating the dictionary used during OMP reconstruction. For our usage, we opened ran `visualize_learnD.m`, which loads raster scan entries inside `Raster_Entries.mat` to generate the dictionary, which saves it as `dictionary.mat`. For the applications section, since objects are dropped to different locations of the sensor, we have to permute each entry in the dictionary to every possible location on the sensor. To achieve this, we ran 'permutation.m` on `dictionary.mat`, and its output is saved as `permuted_dictionary.mat` in the same directory. 
 
 ## Applications
 
@@ -30,10 +34,10 @@ Our data files are located in `SPTS/Data_Analysis`. Each data folder is explaine
 The folder `SPTS/Data_Analysis/utilities/` contains helper functions used by scrips described above.
 * `OMP.m` Orthognal Matching Pursuit algorithm used throughout the project.
 * `SRCAccuracy.m` performs classifications on a input frame using sparse recovery per each object. Classification is assigned to the object whose sparse recovery representation matches the input frame the most, and check if this classification agrees with the ground truth. Returns binary results.
-* `SupportAccuracy.m` 
-* `centerOfMass.m` 
-* `downSample.m` 
-* `transpose_Ay.m` 
+* `SupportAccuracy.m` calculates how a reconstructed frame agrees with a ground truth raster frame of the same object. Pixels are converted to binary by the threshold of 0.23 times maximum sensed pressure. Comparisions are then done by comparing the two frame pixel by pixel, checking if binary data match. Returns a value between 0 and 1. 
+* `centerOfMass.m` calculates center of mass for a frame by calculating weighted averages across x and y axis. Returns coordinates.
+* `downSample.m` evenly removes pixel data across a raster scanned frame, depending on how many pixels are specified to keep.
+* `transpose_Ay.m` transposes and stitches A matrix and y matrix from a 3D array and 2D matrix to a 2D matrix and 1D list. This is for reconstruction.
 
 ## Citation
 
