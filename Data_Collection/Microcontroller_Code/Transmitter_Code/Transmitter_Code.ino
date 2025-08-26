@@ -27,7 +27,7 @@ void setup() {
 }
 
 void loop() {
-  // I2C to communicate mode
+  // Change here depending on whether you use raster or compressive sensing
   if (state == 0 && Serial.available()) {
     if (Serial.read() == 42) { // acsii of '*' is 42
       state = 1;
@@ -35,12 +35,12 @@ void loop() {
       Serial.print("Sending.\n");
       for (int i = 0; i < M; i++) {
         Wire.beginTransmission(i + 8);
-        Wire.write(0);
+        Wire.write(1); // change to 0 if raster, or 2 if compressive sensing
         Wire.endTransmission();
         delay(1);
 
         Wire.beginTransmission(i + 8);
-        Wire.write(0);
+        Wire.write(0); // change to 0 if raster, or i+8 if compressive sensing
         Wire.endTransmission();
         delay(1);
       }
