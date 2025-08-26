@@ -7,7 +7,6 @@
 [Ariel Slepyan](https://scholar.google.com/citations?hl=en&user=8uVwi4UAAAAJ&view_op=list_works&sortby=pubdate)<sup>1</sup>†, 
 [Wanting Xing](https://scholar.google.com/citations?view_op=list_works&hl=en&user=L_5PIfgAAAAJ)<sup>2</sup>†, 
 [Xuanming Zhang](https://www.researchgate.net/profile/Aidan_Aug)<sup>1</sup>†, 
-[Trac Tran](https://scholar.google.com/citations?user=RyRjA0cAAAAJ&hl=en)<sup>1</sup>, 
 [Nitish Thakor](https://scholar.google.com/citations?user=SB_7Bi0AAAAJ&hl=en)<sup>1,2,3</sup>
 <br />
 <sup>1</sup> Department of Electrical and Computer Engineering, Johns Hopkins University, Baltimore, USA<br />
