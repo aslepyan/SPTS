@@ -34,13 +34,18 @@ Raster scans used as examples for the SRC library are located in `Data_Analysis/
 Files responsible for generating random binary weights that all Attiny412s are programmed to generate are in `Data_Analysis/Random_Weights_Generation`. The same LCG function used by every Attiny412 is defined in `lcgRandom.m`, which is called by `amatrix.m` to generate random weight sequences based on the seed and the length of the sequence wanted. For our application, to save time later on, we generated all random weights before data processing: for seeds 8-107 and for a length of 100000, so that no matter how long we collect data, we always have corresponding weights. This is automated in `generate_weights.m`, please run it before any data processing steps. 
 
 ### Support Accuracy
+For compressive sensing scans, the experiment method, run `SPTS_SupportAccuracy.m` inside `Data_Analysis/`. For downsampled raster scans, the control method, run `Raster_SupportAccuracy.m` in the same folder. Rerun for every object. Make sure that for the "shape" parameter at the top, you write exactly the name as specified by the folder names in `Data_Analysis/Measurements_Collected`. Before you run both scripts on the first object, make sure you create a empty array called total_res. 
 
 ### SRC Accuracy
+For compressive sensing scans, the experiment method, run `SPTS_ClassificationAccuracy.m` inside `Data_Analysis/`. For downsampled raster scans, the control method, run `Raster_ClassificationAccuracy.m` in the same folder. Rerun for every object. Make sure that for the "shape" parameter at the top, you write exactly the name as specified by the folder names in `Data_Analysis/Measurements_Collected`. Additionally, make sure that variable "true_label" matches the object that you selected for each run: sort the folders in `Measurements_Collected` alphabetically, "brain" is labeled 1 and "X" is labeled 17. Before you run both scripts on the first object, make sure you create a empty array called total_res. 
+
+If you would like to generate Figure 3E, run `SPTS_ClassificationTime.m`. This file runs all objects at once, and would not need modifications on the user's end.
 
 ### High-Speed Projectile Tracking and Rapid Contact Localization
+Both are contained in `Data_Analysis/Applications.m`. Code lines exclusively necessary for Location Accuracy (Fig 6) and max pressure v. time (Fig 5) are commented accordingly. Please add or remove comments accordingly.
 
 ### Robot Arm Demonstration
-
+To graph the continuous raster scans and reconstructed frames collected for the Robot Arm demo, run `Data_Analysis/robot_arm.m`. It will generate two graphs, for raster and recosntruction separately. Note that for our video we reconstruct every 25 measurements, and raster frames use 100 measurements. Thus reconstructed frames are 4 times the number of raster frames.  
 
 ### Helper Functions
 The folder `SPTS/Data_Analysis/utilities/` contains helper functions used by scrips described above.
@@ -50,8 +55,6 @@ The folder `SPTS/Data_Analysis/utilities/` contains helper functions used by scr
 * `centerOfMass.m` calculates center of mass for a frame by calculating weighted averages across x and y axis. Returns coordinates.
 * `downSample.m` evenly removes pixel data across a raster scanned frame, depending on how many pixels are specified to keep.
 * `transpose_Ay.m` transposes and stitches A matrix and y matrix from a 3D array and 2D matrix to a 2D matrix and 1D list. This is for reconstruction.
-
-## Citation
 
 ## Acknowledgement
 We sincerely appreciate Prof. Jeremy Brown for his advice on this work. We also many many thanks Dr. Ron Rubinstein for his code for training the ksvd dictionary.
