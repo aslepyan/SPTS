@@ -5,16 +5,13 @@ numT = length(Y(:,1)); % Y are raster scans, number of raster scans by number of
 plot_Y = reshape(Y, [numT, 10 10]);
 reorderedDataR = single(zeros(size(Y)));
 
-for i = 1:numT
-    %img = squeeze(plot_Y(i,:,:));
-    % Un-comment to visualize
-    %imagesc(img',[-1,1]); axis equal %uncomment for plotting
-    %drawnow
-end
-
-all_data = double(Y);
+% Please Note: Raster_Entries.mat contains 10000 frame entries for each of
+% our 17 objects, for a total of 170000 by 100 array. If this is too large
+% to run, you may trim the array as needed, just keep in mind that ever
+% 10000 row is a new object, and it's necessary to keep the numer of sample
+% frames consistent across all objects. 
+all_data = double(Y); % datatype conversion
 %% Pre-processing before Dictionary Learning
-close all
 % add ksvd box to path
 addpath 'ksvdbox13'
 % add omp box to path
@@ -37,8 +34,6 @@ unique_data = good_data(setdiff(1:length(good_data(:,1)),u),:);
 % Look at unique data
 maxval = max(unique_data');
 minval = min(unique_data');
-unique_data_N = unique_data';
-%unique_data_N = (unique_data'-minval) ./ (maxval-minval);
 
 uniqueImg = showdict(unique_data',[10 10],floor(sqrt(length(unique_data(:,1)))),floor(sqrt(length(unique_data(:,1)))),'lines');
 figure()
@@ -59,7 +54,7 @@ close all
 % Perform KSVD 
 params.data = unique_data';
 params.Tdata = 20 ; %desired sparsity
-params.dictsize = 100; %size of dictionary
+params.dictsize = 100; %size of dictionary, need to be adjusted such that it is samller than unique_data row count 
 [Dksvd,g,err] = ksvd(params,''); %Dksvd is dictionary by ksvd
 
 % Normaization Step

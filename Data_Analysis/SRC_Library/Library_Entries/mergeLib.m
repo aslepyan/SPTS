@@ -51,12 +51,3 @@ end
 
 % Now final_array is size 100 x 170
 disp(size(final_array))
-
-%%
-for i = 1:180
-    imagesc(reshape(final_array(:,i),10,10)',[-1,1]);
-    pause()
-end
-
-
-

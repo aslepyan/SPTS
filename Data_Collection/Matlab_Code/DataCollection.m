@@ -1,5 +1,6 @@
-%% Export measurement data from serial port into matlab
-% Rudy Zhang, 7/8/20
+%% Export measurement data from serial port into matlab. Data is printed to 
+% serial via the microcontroller (code in Microcontroller_Code/Transmitter_Code),
+% This script is to read those data sequentially and store them in .mat files.
 
 % serial port setting 
 port = '/dev/cu.usbmodem130785001'; % change to your own port
@@ -15,7 +16,8 @@ C = [];
 numNoData = 2; %! for first 2 string in serial port are 'sending' and 'sent'.
 j=1;
 
-while true
+while true % Pres the Stop button in Matlab ribbon to stop data collection. 
+           % Do not worry about the error message when you click it. 
     % for first 2 strings in serial port are 'sending' and 'sent'.
     if j<numNoData+1
         str = readline(s);
@@ -43,14 +45,10 @@ while true
     Ymatrix = reshape(measurements,[frameSize,frameCount]);
     % old version
     Ymatrix = Ymatrix/1023*3.3;
-    Ymatrix = Ymatrix*508/165 - 4.3; % old version
-    %Ymatrix = Ymatrix*11140/570 - 32;
+    Ymatrix = Ymatrix*508/165 - 4.3; % For Raster Scans
+    %Ymatrix = Ymatrix*11140/570 - 32; % For SPTS Compressed Scans
     Ymatrix = -Ymatrix;
-    % % plot the Ymatrix 
-    % imagesc(Ymatrix,[-1,1]);
-    % colorbar;
-    % pause(eps);
-    
+
     C = cat(3,C,Ymatrix);
     
 end

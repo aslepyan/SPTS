@@ -27,8 +27,6 @@ for i = 1:50
     end
 end
 
-
-
 % Generate a random 100×2450 matrix (Example)
 matrix_size = size(Dksvd_new);
 % Initialize shuffled matrix

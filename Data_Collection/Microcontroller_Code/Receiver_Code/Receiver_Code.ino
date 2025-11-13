@@ -7,7 +7,7 @@ int rec = -1;
 unsigned long seed = 0;
 int count = 7;
 int mode = -1;
-int adrs = 30;
+int adrs = 30; // Change for every Attiny. we did 8-107 starting on row 1 col 1, going left to right, then the row below
 int itgt = 0;
 
 void setup() {
